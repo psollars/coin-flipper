@@ -4,6 +4,7 @@ body {
 	margin: 0px auto;
 	display: flex;
 	flex-direction: column;
+	background-color: #222;
 }
 
 .container {
@@ -17,7 +18,9 @@ body {
 	text-align: center;
 }
 
-
+p {
+	color: #fff;
+}
 
 
 
