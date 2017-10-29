@@ -22,7 +22,33 @@ p {
 	color: #fff;
 }
 
+.coin {
+	display: flex;
+}
 
+.coin img {
+	height: auto;
+	width: auto;
+	max-width: 120px;
+	max-height: 120px;
+}
+
+#result img {
+
+}
+
+.spin img {
+	max-width: 160px;
+	max-height: 160px;
+}
+
+#spin {
+	display: none;
+}
+
+#flip {
+	display: none;
+}
 
 @media only screen and (min-width: 480px) {
 	/*styles for tablet*/
