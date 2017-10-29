@@ -1,61 +1,81 @@
 	
-	const flipButton = document.getElementById("flip");
-	let randomCoinFlipResult = "";
+const flipButton = document.getElementById("flip");
+let coin = ["",""]
+const messageBox = document.getElementById("messageBox");
+const tails = document.getElementById("tails");
+const heads = document.getElementById("heads");
+const coinSpin = document.getElementById("spin");
+//const userGuess = document.getElementById("guess");
 
-	flipButton.onclick = function() {
-		flipACoin();
-		checkGuess(userGuess.value, randomCoinFlipResult);
-	}
+tails.onclick = function() {
+	flipACoin();
+	checkGuess("tails", coin[0]);
+	animation(coin);
+}
 
-	flipButton.onkeydown = function(e) { // onkeydown is passing the event into the function
-		if (e.key === 'Enter') { // we're looking to see if the user pressed the enter key
-			flipACoin();
-			checkGuess(userGuess.value, randomCoinFlipResult);
-		}
-	}
+heads.onclick = function() {
+	flipACoin(heads);
+	checkGuess("heads", coin[0]);
+	animation(coin);
+}
 
-	const userGuess = document.getElementById("guess");
+flipButton.onclick = function() {
+	heads.style.display = "block";
+	tails.style.display = "block";
+	flipButton.style.display = "none";
+	message("");
+}
 
-	const messageBox = document.getElementById("messageBox");
-
-	function flipACoin() {
+const flipACoin = function() {
 		let randomFlip = Math.random()
 		if (randomFlip < .5) {
-			console.log("heads");
-			randomCoinFlipResult = "heads";
+			coin = ["heads", "tails"];
 		} else {
-			console.log("tails");
-			randomCoinFlipResult = "tails";
+			coin = ["tails", "heads"];
 		}
-		return randomCoinFlipResult;
+		return coin;
 	}
 
-	function checkGuess(headsOrTailsGuess, headsOrTailsRandom) {
-		let cleanGuess = headsOrTailsGuess.trim()
-		cleanGuess = cleanGuess.toLowerCase()
-		if (cleanGuess === "heads") {
-			console.log("you guessed heads");
-			guessResult(cleanGuess, headsOrTailsRandom);
-		} else if (cleanGuess === "tails") {
-			console.log("you guessed tails");
-			guessResult(cleanGuess, headsOrTailsRandom);
-		} else
-		alert("You need to guess \"Heads\" or \"Tails\".");
-	}
-
-	function guessResult(checkedGuess, result) {
-		if (checkedGuess === result) {
-			console.log(checkedGuess + " | " + result);
-			message("It was " + result + "<br/>You guessed right!");
-		} else if (checkedGuess !== result) {
-			console.log(checkedGuess + " | " + result);
-			message("It was " + result + "<br/>You guessed wrong :(");
+const checkGuess = function(headsOrTailsGuess, headsOrTailsRandom) {
+		if (headsOrTailsGuess === headsOrTailsRandom) {
+			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsRandom);
+			window.setTimeout(function() {
+				message("It was " + headsOrTailsRandom + "<br/>You guessed right!");
+				flipButton.style.display = "block";
+			}, 2000);
+		} else if (headsOrTailsGuess !== headsOrTailsRandom) {
+			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsRandom);
+			window.setTimeout(function() {
+				message("It was " + headsOrTailsRandom + "<br/>You guessed wrong :(");
+				flipButton.style.display = "block";
+			}, 2000);
 		} else {
-			message("something bad happened");
+			alert("something bad happened");
 		}
-	}
+}
 
-	function message(messageToDisplay) {
+const animation = function(coin) {
+	coinSpin.style.display = "block";
+	tails.style.display = "none";
+	heads.style.display = "none";
+	if (coin[0] === "heads") {
+		window.setTimeout(function() {
+			coinSpin.style.display = "none";
+			heads.style.display = "block";
+			tails.style.display = "none";
+		}, 1500);
+	} else if (coin[0] === "tails") {
+		window.setTimeout(function() {
+			coinSpin.style.display = "none";
+			tails.style.display = "block";
+			heads.style.display = "none";
+		}, 1500);
+	} else {
+		alert("something bad happened");
+	}
+}
+
+const message = function(messageToDisplay) {
 		messageBox.innerHTML = messageToDisplay;
 	}
 
