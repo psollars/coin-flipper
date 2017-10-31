@@ -1,21 +1,20 @@
 (function(){
 	const flipButton = document.getElementById("flip");
-	let coin = ["",""]
 	const messageBox = document.getElementById("messageBox");
 	const tails = document.getElementById("tails");
 	const heads = document.getElementById("heads");
 	const coinSpin = document.getElementById("spin");
 
 	tails.onclick = function() {
-		flipACoin();
-		checkGuess("tails", coin[0]);
-		animation(coin);
+		let headsOrTails = flipACoin();
+		animation(headsOrTails);
+		checkGuess("tails", headsOrTails);
 	}
 
 	heads.onclick = function() {
-		flipACoin(heads);
-		checkGuess("heads", coin[0]);
-		animation(coin);
+		let headsOrTails = flipACoin();
+		animation(headsOrTails);
+		checkGuess("heads", headsOrTails);
 	}
 
 	flipButton.onclick = function() {
@@ -28,24 +27,23 @@
 	const flipACoin = function() {
 		let randomFlip = Math.random()
 		if (randomFlip < .5) {
-			coin = ["heads", "tails"];
+			return "heads";
 		} else {
-			coin = ["tails", "heads"];
+			return "tails"
 		}
-		return coin;
 	}
 
-	const checkGuess = function(headsOrTailsGuess, headsOrTailsRandom) {
-		if (headsOrTailsGuess === headsOrTailsRandom) {
-			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsRandom);
+	const checkGuess = function(headsOrTailsGuess, headsOrTailsResult) {
+		if (headsOrTailsGuess === headsOrTailsResult) {
+			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsResult);
 			window.setTimeout(function() {
-				message("It was " + headsOrTailsRandom + "<br/>You guessed right!");
+				message("It was " + headsOrTailsResult + "<br/>You guessed right!");
 				flipButton.style.display = "block";
 			}, 2000);
-		} else if (headsOrTailsGuess !== headsOrTailsRandom) {
-			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsRandom);
+		} else if (headsOrTailsGuess !== headsOrTailsResult) {
+			console.log("Your Guess: " + headsOrTailsGuess + " | Flip Result: " + headsOrTailsResult);
 			window.setTimeout(function() {
-				message("It was " + headsOrTailsRandom + "<br/>You guessed wrong :(");
+				message("It was " + headsOrTailsResult + "<br/>You guessed wrong :(");
 				flipButton.style.display = "block";
 			}, 2000);
 		} else {
@@ -53,17 +51,17 @@
 		}
 	}
 
-	const animation = function(coin) {
+	const animation = function(headsOrTails) {
 		coinSpin.style.display = "block";
 		tails.style.display = "none";
 		heads.style.display = "none";
-		if (coin[0] === "heads") {
+		if (headsOrTails === "heads") {
 			window.setTimeout(function() {
 				coinSpin.style.display = "none";
 				heads.style.display = "block";
 				tails.style.display = "none";
 			}, 1500);
-		} else if (coin[0] === "tails") {
+		} else if (headsOrTails === "tails") {
 			window.setTimeout(function() {
 				coinSpin.style.display = "none";
 				tails.style.display = "block";
