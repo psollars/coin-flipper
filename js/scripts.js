@@ -1,4 +1,4 @@
-(function(){
+(function() {
 	const flipButton = document.getElementById("flip");
 	const messageBox = document.getElementById("messageBox");
 	const tails = document.getElementById("tails");
@@ -9,29 +9,29 @@
 		let headsOrTails = flipACoin();
 		animation(headsOrTails);
 		checkGuess("tails", headsOrTails);
-	}
+	};
 
 	heads.onclick = function() {
 		let headsOrTails = flipACoin();
 		animation(headsOrTails);
 		checkGuess("heads", headsOrTails);
-	}
+	};
 
 	flipButton.onclick = function() {
 		heads.style.display = "block";
 		tails.style.display = "block";
 		flipButton.style.display = "none";
 		message("");
-	}
+	};
 
 	const flipACoin = function() {
-		let randomFlip = Math.random()
+		let randomFlip = Math.random();
 		if (randomFlip < .5) {
 			return "heads";
 		} else {
-			return "tails"
+			return "tails";
 		}
-	}
+	};
 
 	const checkGuess = function(headsOrTailsGuess, headsOrTailsResult) {
 		if (headsOrTailsGuess === headsOrTailsResult) {
@@ -49,7 +49,7 @@
 		} else {
 			alert("something bad happened");
 		}
-	}
+	};
 
 	const animation = function(headsOrTails) {
 		coinSpin.style.display = "block";
@@ -70,9 +70,9 @@
 		} else {
 			alert("something bad happened");
 		}
-	}
+	};
 
 	const message = function(messageToDisplay) {
 		messageBox.innerHTML = messageToDisplay;
-	}
+	};
 }());
